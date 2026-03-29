@@ -1,0 +1,860 @@
+/* style.css - Clean & Minimal Professional Styling */
+
+:root {
+  --primary: #961A5F;
+  --secondary: #201E1F;
+  --accent: #f1e9ee;
+
+  --font-heading: 'Geologica', sans-serif;
+  --font-body: 'Geologica', sans-serif;
+
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-normal: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Borders & Strokes */
+  --stroke: 1px solid rgba(32, 30, 31, 0.1);
+  --stroke-light: 1px solid rgba(237, 227, 233, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@media (pointer: coarse) {
+  html, body {
+    /* Kills the bounce ONLY on phones/tablets */
+    overscroll-behavior-y: none; 
+    overscroll-behavior-x: none;
+  }
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100vw;
+  overscroll-behavior-x: none;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+body {
+  background-color: var(--accent);
+  background-image: 
+    linear-gradient(to right, rgba(32, 30, 31, 0.1) 1px, transparent 1px), /* Changed from 0.05 to 0.03 */
+    linear-gradient(to bottom, rgba(32, 30, 31, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--secondary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--secondary);
+  line-height: 1.2;
+}
+
+p {
+  color: rgba(32, 30, 31, 0.8);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float-reverse {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(20px) rotate(-3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Move exactly halfway */
+}
+
+.float-animation { animation: float 6s ease-in-out infinite; }
+.bounce-animation { animation: float-reverse 8s ease-in-out infinite; }
+
+/* Buttons */
+.btn-primary {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--accent);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: 50px;
+  border: 1px solid var(--primary);
+  transition: var(--transition-normal);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--secondary);
+  transition: var(--transition-normal);
+  z-index: -1;
+}
+
+.btn-primary:hover::after {
+  height: 100%;
+  bottom: auto;
+  top: 0;
+}
+
+.btn-primary:hover {
+  border-color: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(150, 26, 95, 0.2);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background: transparent;
+  color: var(--secondary);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: 50px;
+  border: 1px solid var(--secondary);
+  transition: var(--transition-normal);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-primary.outline {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-primary.outline::after { background: var(--accent); }
+.btn-primary.outline:hover { color: var(--secondary); border-color: var(--accent); }
+
+.block { width: 100%; }
+
+/* Header */
+.header {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  background: transparent;
+  align-items: center;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  padding-top: 2rem;
+  border-bottom: 1px solid transparent;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  max-width: 1400px;
+  width: 100%;
+}
+
+.header-logo-class{
+  display: flex;
+  justify-content: center;
+  height: 60px;
+}
+
+
+/* Hero Section */
+.hero {
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  padding: 8rem 2rem 4rem;
+  margin: 0 auto;
+  gap: 4rem;
+  overflow: visible;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  word-spacing: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title span {
+  color: var(--primary);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+  font-weight: 300;
+}
+
+@keyframes loadIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-load-animation {
+  animation: loadIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.1s; 
+  opacity: 0;
+}
+
+.bubble-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible; /* Keeps bubbles from breaking page scroll limits */
+  z-index: 3; /* Places them behind your hero text (z-index: 2) */
+  pointer-events: none; /* Prevents bubbles from blocking clicks on buttons */
+}
+
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  left: var(--left);      /* Randomized by JS */
+  width: var(--size);     /* Randomized by JS */
+  animation: floatUp var(--duration) linear infinite;
+  animation-delay: var(--delay); /* Randomized by JS */
+  will-change: trasnform, opacity;
+}
+
+.bubble img {
+  width: 100%;
+  height: auto;
+  opacity: 0.75;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1; /* Fade in as they enter */
+  }
+  20%, 90%{
+    opacity: 1;
+  }
+  100% {
+    /* Move up 120% of the viewport height so they fully cross the section */
+    transform: translateY(-150vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .hero { flex-direction: column; text-align: center; padding-top: 10rem; }
+  .hero-content { align-items: center; display: flex; flex-direction: column; }
+  .hero-subtitle { margin-left: auto; margin-right: auto; }
+}
+
+.stock-ticker{
+  color: var(--primary); 
+}
+
+/* Menu */
+
+.menu {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.menu-item {
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Removes the default arrow from Chrome/Safari */
+.menu-item summary::-webkit-details-marker {
+  display: none;
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  list-style: none;
+}
+
+.menu-title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.menu-arrow {
+  width: 24px;
+  height: auto;
+  /* This controls how smooth the flip looks */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Prevents the arrow from being "grabbed" during the carousel drag */
+  pointer-events: none;
+  user-select: none;
+}
+/* Container for the big content */
+.menu-content {
+  padding: 2rem 0 4rem 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-item[open] .menu-content {
+  max-height: 2000px; /* High enough for big content */
+  opacity: 1;
+}
+
+.menu-item[open] .menu-arrow {
+  transform: rotate(180deg);
+  opacity: 0.5;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Custom Scrollbar for Chrome/Safari */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 12px;
+}
+
+
+.carousel-img-box {
+  width: 100%;
+  aspect-ratio: 1/1; /* Vertical poster look */
+  background: var(--accent);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.carousel-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: scale 0.5s ease;
+  pointer-events: none;
+}
+
+.carousel-info h4 {
+  font-size: 1.1rem;
+  text-align: left;
+  font-weight: 500;
+  user-select: none;
+}
+
+.carousel-info p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  user-select: none;
+}
+
+/* Optimized Menu Content for Carousel */
+.menu-content-work {
+  padding: 2rem 0;
+  /* Remove max-height constraints that fight with the carousel */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.menu-item[open] .menu-content-work {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Fix for Carousel Squashing & Grabbing */
+.carousel-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 20px 3rem 20px;
+  flex-wrap: nowrap;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-x;
+  scrollbar-width: none;
+}
+
+.carousel-container:active {
+  cursor: grabbing;
+}
+
+.carousel-item {
+  flex: 0 0 280px; /* CRITICAL: Forces items to stay 320px wide */
+  min-width: 280px;
+  pointer-events: auto; /* Re-enable clicks for the link itself */
+  scroll-snap-align: start;
+}
+
+/* Prevent images and text from being grabbable/selectable */
+.carousel-item img, 
+.carousel-item h4, 
+.carousel-item p, 
+.carousel-item span {
+  pointer-events: none; 
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Optional: Subtle fade on hover to match your other animations */
+.carousel-item:hover .project-tags span {
+  background: var(--primary);
+  color: var(--accent);
+  transition: var(--transition-fast);
+}
+
+
+/* Services */
+
+/* Services Specific Layout */
+.services-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: left;
+}
+
+.service-category {
+  border-bottom: 1px solid rgba(32, 30, 31, 0.1);
+  padding-bottom: 2rem;
+}
+
+.service-main h3 {
+  color: var(--primary);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* Vertical Services Stack */
+.services-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; /* Space between categories */
+  padding-top: 1rem;
+}
+
+.service-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Space between dashed items */
+}
+
+.service-group-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.service-dash-item {
+  font-family: var(--font-body);
+  color: var(--secondary);
+  line-height: 1.2;
+  font-weight: 300;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.project-tags span {
+  font-family: var(--font-body); /* Geologica */
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  background: rgba(150, 26, 95, 0.08); /* Subtle hint of your primary color */
+  color: var(--primary);
+  border-radius: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+
+
+/* Team/Mega-Sections Layout */
+.team-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.team-card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden; /* Keeps the main image tidy */
+  background: var(--accent);
+  border-radius: 4px;
+  cursor: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.main-headshot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.team-card:hover .main-headshot {
+  transform: scale(1.05);
+  user-select: none;
+}
+
+.team-info {
+  margin-top: 1.5rem;
+  text-align: left;
+  user-select: none;
+}
+
+.behance-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.behance-link h3 {
+  font-family: var(--font-heading);
+  color: var(--secondary);
+  font-size: 1.4rem;
+  margin-bottom: 0.2rem;
+  transition: color var(--transition-fast);
+}
+
+.behance-link p {
+  font-family: var(--font-body); /* Geologica */
+  color: var(--primary);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.behance-link:hover h3 {
+  color: var(--primary);
+}
+
+.cursor-follower {
+  position: fixed; 
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid var(--primary);
+  background-size: cover;
+  background-position: center;
+  pointer-events: none; 
+  z-index: 9999;
+  
+  /* Initial hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%) scale(0.5);
+  
+  /* Smooth transition for the scaling/fade effect */
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.image-wrapper:hover .cursor-follower {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+/* Contact Section */
+
+.contact {
+  padding: 8rem 2rem;
+  border-top: none;
+  background: var(--light);
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.contact-card {
+  background: var(--accent);
+  padding: 4rem;
+  border-radius: 32px;
+  border: var(--stroke);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  /* Updated Box Shadow: Layered for a smooth, deep 3D effect */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-card p {
+  margin-bottom: 2.5rem;
+}
+
+.contact-form {
+  text-align: left;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+/* 1. Grouped input, select, and textarea together for consistent base styling */
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 1.25rem;
+  border: var(--stroke);
+  border-radius: 12px;
+  background: var(--light);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--secondary);
+  transition: var(--transition-fast);
+}
+
+/* 2. Added specific rules for the select dropdown */
+.input-group select {
+  cursor: pointer;
+  /* Adds a little extra space on the right so text doesn't hit the dropdown arrow */
+  padding-right: 2.5rem; 
+}
+
+/* 3. Added specific rules for the textarea */
+.input-group textarea {
+  /* Prevents horizontal resizing which breaks the card layout */
+  resize: vertical; 
+  min-height: 120px;
+}
+
+/* 4. Grouped focus states for all form fields */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(150, 26, 95, 0.1);
+}
+
+/* 5. Styled the dropdown categories (optgroups) to stand out */
+.input-group optgroup {
+  font-weight: 700;
+  color: var(--primary); /* You can change this to var(--secondary) if it's too bright */
+  background: var(--light);
+}
+
+.input-group option {
+  font-weight: 400;
+  color: var(--secondary);
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .contact-card { padding: 2rem; }
+}
+
+/* Footer Navigation */
+.footer {
+  background: var(--secondary);
+  color: var(--accent);
+  padding: 5rem 2rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-logo {
+  height: 80px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-brand p {
+  color: var(--accent);
+  opacity: 50%;
+  max-width: 300px;
+}
+
+.footer-links h4, .footer-social h4 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.footer-links a, .footer-social a {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+  transition: var(--transition-slow);
+}
+
+.footer-links a:hover, .footer-social a:hover {
+  color: var(--accent);
+  transform: translateX(5px);
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  text-align: center;
+  color: var(--accent);
+  font-size: 0.875rem;
+}
+.footer-text{
+  text-align: center;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  .footer-logo { margin: 0 auto 1.5rem; }
+  .footer-brand p { margin: 0 auto; }
+  .footer-links a:hover, .footer-social a:hover { transform: translateY(-2px); }
+}
+
+/* Interaction Utility classes */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
