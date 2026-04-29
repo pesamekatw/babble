@@ -1,18 +1,18 @@
 backend:
   name: git-gateway
-  branch: main # Η ονομασία του branch σου στο GitHub
+  branch: main
 
-media_folder: "images/portfolio" # Πού θα αποθηκεύονται οι φωτογραφίες
-public_folder: "/images/portfolio" # Το path που θα βλέπει η HTML
+media_folder: "images/portfolio"
+public_folder: "/images/portfolio"
 
 collections:
-  - name: "works" # Το όνομα της ενότητας
-    label: "Τα Έργα μας" # Αυτό που θα βλέπει ο πελάτης
-    folder: "content/works" # Πού θα αποθηκεύονται τα αρχεία (π.χ. ως .json ή .md)
-    create: true # Επιτρέπει στον πελάτη να προσθέτει νέα έργα
-    slug: "{{title}}" # Το όνομα του αρχείου θα είναι ο τίτλος του έργου
-    fields: # ΕΔΩ ΟΡΙΖΕΙΣ ΤΙ ΜΠΟΡΟΥΝ ΝΑ ΑΛΛΑΞΟΥΝ
+  - name: "works"
+    label: "Τα Έργα μας"
+    folder: "content/works"
+    create: true
+    slug: "{{title}}"
+    fields:
       - { label: "Τίτλος Έργου", name: "title", widget: "string" }
       - { label: "Ημερομηνία", name: "date", widget: "datetime" }
       - { label: "Φωτογραφία Έργου", name: "image", widget: "image" }
-      - { label: "Περιγραφή", name: "body", widget: "markdown" }`
+      - { label: "Περιγραφή", name: "body", widget: "markdown" }
