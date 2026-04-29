@@ -168,15 +168,57 @@
   </script>
 
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    async function fetchBabblePortfolio() {
+  const container = document.getElementById('masonry-portfolio');
+  // Προσοχή: Βεβαιώσου ότι το repo είναι Public!
+  const GITHUB_API_URL = 'https://api.github.com/repos/pesamekatw/babble/contents/content/works';
+
+  try {
+    const response = await fetch(GITHUB_API_URL);
+    
+    // Αν ο φάκελος δεν υπάρχει ακόμα (επειδή δεν ανέβασες project)
+    if (response.status === 404) {
+      container.innerHTML = '<p class="loading-text">Το portfolio ετοιμάζεται. Προσθέστε το πρώτο έργο από το CMS!</p>';
+      return;
     }
+
+    if (!response.ok) throw new Error('API Error');
+    
+    const files = await response.json();
+    container.innerHTML = ''; 
+
+    // Φιλτράρουμε μόνο τα .json αρχεία
+    const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+
+    if (jsonFiles.length === 0) {
+      container.innerHTML = '<p class="loading-text">Δεν βρέθηκαν έργα στον φάκελο content/works.</p>';
+      return;
+    }
+
+    for (const file of jsonFiles) {
+      const contentRes = await fetch(file.download_url);
+      const project = await contentRes.json();
+
+      const item = document.createElement('div');
+      item.className = 'masonry-item fade-up';
+      
+      item.innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        <div class="masonry-overlay">
+          <h3>${project.title}</h3>
+          <p>${project.body || ''}</p>
+        </div>
+      `;
+      
+      container.appendChild(item);
+    }
+  } catch (err) {
+    console.error('Λεπτομέρειες σφάλματος:', err);
+    container.innerHTML = '<p class="loading-text">Σφάλμα σύνδεσης με το GitHub. Βεβαιωθείτε ότι το repo είναι Public.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', fetchBabblePortfolio);
   </script>
 </body>
 </html>
