@@ -216,16 +216,6 @@ i {
   pointer-events: none;
 }
 
-.bubble {
-  position: absolute;
-  bottom: -150px;
-  left: var(--left);
-  width: var(--size);
-  animation: floatUp var(--duration) linear infinite;
-  animation-delay: var(--delay);
-  will-change: transform, opacity;
-}
-
 /* =========================================
    Portfolio Masonry Section
    ========================================= */
@@ -347,48 +337,6 @@ i {
   .masonry-overlay p {
     transform: translateY(0);
   }
-}
-
-/* Menu & Carousel */
-.menu {
-  padding: 4rem 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.carousel-container {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  padding: 1rem 0 3rem 0;
-  scrollbar-width: none; /* Firefox */
-  cursor: grab;
-  -webkit-overflow-scrolling: touch;
-}
-
-.carousel-container:active {
-  cursor: grabbing;
-}
-
-.carousel-item {
-  flex: 0 0 280px;
-  min-width: 280px;
-}
-
-/* Services */
-.services-vertical-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  padding-top: 1rem;
-}
-
-.service-dash-item {
-  font-weight: 300;
-  margin-bottom: 0.5rem;
-  color: var(--secondary);
 }
 
 /* Contact Card */

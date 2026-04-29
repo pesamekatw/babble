@@ -16,5 +16,10 @@ collections:
     fields:
       - { label: "Τίτλος Έργου", name: "title", widget: "string" }
       - { label: "Ημερομηνία", name: "date", widget: "datetime" }
-      - { label: "Φωτογραφία Έργου", name: "image", widget: "image" }
+      - { label: "Φωτογραφία Έργου (Κύρια)", name: "image", widget: "image" }
+      - label: "Γαλερί Φωτογραφιών"
+        name: "gallery"
+        widget: "list"
+        field: { label: "Φωτογραφία", name: "photo", widget: "image" }
+        allow_add: true
       - { label: "Περιγραφή", name: "body", widget: "markdown" }

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project - Babble.gr</title>
+  <meta name="description" content="Project details and gallery from Babble studio.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&family=Manrope:wght@200..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/assets/Bubble Illustration.ico">
+  
+  <script src="https://kit.fontawesome.com/5c7ad3823f.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Project Detail Page Styles */
+    .project-detail-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--dot-color);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .project-detail-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background: transparent;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .detail-logo {
+      height: 60px;
+    }
+
+    .project-detail-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+    }
+
+    /* Gallery Styles */
+    #gallery-container {
+      margin-bottom: 4rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: var(--stroke);
+      background: var(--secondary);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      padding: 2rem;
+    }
+
+    .lightbox-image {
+      max-width: 90%;
+      max-height: 90vh;
+      margin: auto;
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: zoomIn 0.3s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+      to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: var(--secondary);
+      cursor: pointer;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+      color: #ccc;
+    }
+
+    /* Project Info Styles */
+    .project-info {
+      background: rgba(220, 220, 220, 0.05);
+      padding: 3rem;
+      border-radius: 16px;
+      border: var(--stroke);
+    }
+
+    .project-info h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .project-date {
+      color: rgba(32, 30, 31, 0.6);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .project-description {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+
+    .project-description p {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .project-description strong {
+      font-weight: 600;
+    }
+
+    /* Back Button */
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--primary);
+      padding: 0.875rem 2rem;
+      border-radius: 50px;
+      border: 1px solid var(--primary);
+      transition: var(--transition-normal);
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: var(--secondary);
+    }
+
+    /* Fade-up animation */
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-info {
+        padding: 1.5rem;
+      }
+
+      .project-info h1 {
+        font-size: 1.75rem;
+      }
+
+      .project-description {
+        font-size: 1rem;
+      }
+
+      .lightbox-image {
+        max-width: 95%;
+        max-height: 85vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="project-detail-wrapper">
+    <nav class="project-detail-header">
+      <a href="/" class="detail-logo">
+        <img src="/assets/Logo.png" alt="Babble Logo">
+      </a>
+    </nav>
+
+    <main>
+      <div class="project-detail-container">
+        <div id="gallery-container"></div>
+        <div id="project-detail"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/Logo.png" alt="Babble Logo" class="footer-logo">
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="/">Home</a>
+          <a href="/#work">Portfolio</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-social">
+          <h4>Socials</h4>
+          <a href="https://www.instagram.com/babblechios/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/BabbleGR/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-text">&copy; 2026 Babble Studio. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/detail-loader.js" defer></script>
+</body>
+</html>

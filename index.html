@@ -100,7 +100,6 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="/assets/Logo.png" alt="Babble Logo" class="footer-logo">
-        <p>Clean. Minimal. Professional.</p>
       </div>
       <div class="footer-links">
         <h4>Navigation</h4>
@@ -118,107 +117,5 @@
     </div>
   </footer>
 
-  <script>
-    async function loadPortfolio() {
-      const container = document.getElementById('masonry-portfolio');
-      
-      // ΠΡΟΣΟΧΗ: Άλλαξε αυτά τα δύο με τα δικά σου στοιχεία GitHub
-      const username = 'pesamekatw'; 
-      const repo = 'https://github.com/pesamekatw/babble';
-      const folderPath = 'content/works';
-
-      try {
-        // 1. Παίρνουμε τη λίστα των αρχείων από τον φάκελο content/works
-        const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${folderPath}`);
-        
-        if (!response.ok) throw new Error('Failed to fetch folder');
-        
-        const files = await response.json();
-        container.innerHTML = ''; // Σβήνουμε το "Φόρτωση..."
-
-        // 2. Για κάθε αρχείο JSON, διαβάζουμε το περιεχόμενο
-        for (const file of files) {
-          if (file.name.endsWith('.json')) {
-            const dataRes = await fetch(file.download_url);
-            const project = await dataRes.json();
-
-            // 3. Φτιάχνουμε το HTML για το κάθε έργο
-            const item = document.createElement('div');
-            item.className = 'masonry-item fade-up'; // Κρατάμε τα δικά σου classes για το styling
-            
-            item.innerHTML = `
-              <img src="${project.image}" alt="${project.title}">
-              <div class="masonry-overlay">
-                <h3>${project.title}</h3>
-                <p>${project.body || ''}</p>
-              </div>
-            `;
-            
-            container.appendChild(item);
-          }
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        container.innerHTML = '<p style="text-align:center; width:100%;">Παρουσιάστηκε πρόβλημα στη φόρτωση του portfolio.</p>';
-      }
-    }
-
-    // Εκτέλεση της συνάρτησης όταν φορτώσει η σελίδα
-    document.addEventListener('DOMContentLoaded', loadPortfolio);
-  </script>
-
-  <script>
-    async function fetchBabblePortfolio() {
-  const container = document.getElementById('masonry-portfolio');
-  // Προσοχή: Βεβαιώσου ότι το repo είναι Public!
-  const GITHUB_API_URL = 'https://api.github.com/repos/pesamekatw/babble/contents/content/works';
-
-  try {
-    const response = await fetch(GITHUB_API_URL);
-    
-    // Αν ο φάκελος δεν υπάρχει ακόμα (επειδή δεν ανέβασες project)
-    if (response.status === 404) {
-      container.innerHTML = '<p class="loading-text">Το portfolio ετοιμάζεται. Προσθέστε το πρώτο έργο από το CMS!</p>';
-      return;
-    }
-
-    if (!response.ok) throw new Error('API Error');
-    
-    const files = await response.json();
-    container.innerHTML = ''; 
-
-    // Φιλτράρουμε μόνο τα .json αρχεία
-    const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-
-    if (jsonFiles.length === 0) {
-      container.innerHTML = '<p class="loading-text">Δεν βρέθηκαν έργα στον φάκελο content/works.</p>';
-      return;
-    }
-
-    for (const file of jsonFiles) {
-      const contentRes = await fetch(file.download_url);
-      const project = await contentRes.json();
-
-      const item = document.createElement('div');
-      item.className = 'masonry-item fade-up';
-      
-      item.innerHTML = `
-        <img src="${project.image}" alt="${project.title}">
-        <div class="masonry-overlay">
-          <h3>${project.title}</h3>
-          <p>${project.body || ''}</p>
-        </div>
-      `;
-      
-      container.appendChild(item);
-    }
-  } catch (err) {
-    console.error('Λεπτομέρειες σφάλματος:', err);
-    container.innerHTML = '<p class="loading-text">Σφάλμα σύνδεσης με το GitHub. Βεβαιωθείτε ότι το repo είναι Public.</p>';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', fetchBabblePortfolio);
-  </script>
 </body>
 </html>
