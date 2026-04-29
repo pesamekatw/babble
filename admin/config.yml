@@ -9,6 +9,8 @@ collections:
   - name: "works"
     label: "Τα Έργα μας"
     folder: "content/works"
+    extension: json
+    format: json
     create: true
     slug: "{{title}}"
     fields:
