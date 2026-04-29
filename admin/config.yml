@@ -1,35 +1,18 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Η ονομασία του branch σου στο GitHub
 
-# Uncomment the line below if you are testing on your local computer
-  local_backend: true
-
-media_folder: "assets"
-public_folder: "/assets"
+media_folder: "images/portfolio" # Πού θα αποθηκεύονται οι φωτογραφίες
+public_folder: "/images/portfolio" # Το path που θα βλέπει η HTML
 
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-      - label: "Home Page"
-        name: "home"
-        file: "content/home.json"
-        fields:
-          - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
-
-  - name: "portfolio"
-    label: "Portfolio"
-    files:
-      - label: "Projects Data"
-        name: "projects"
-        file: "content/projects.json"
-        fields:
-          - label: "Project List"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Project Image", name: "image", widget: "image" }
-              - { label: "Project Title", name: "title", widget: "string" }
-              - { label: "Project Subtitle", name: "subtitle", widget: "string" }
+  - name: "works" # Το όνομα της ενότητας
+    label: "Τα Έργα μας" # Αυτό που θα βλέπει ο πελάτης
+    folder: "content/works" # Πού θα αποθηκεύονται τα αρχεία (π.χ. ως .json ή .md)
+    create: true # Επιτρέπει στον πελάτη να προσθέτει νέα έργα
+    slug: "{{title}}" # Το όνομα του αρχείου θα είναι ο τίτλος του έργου
+    fields: # ΕΔΩ ΟΡΙΖΕΙΣ ΤΙ ΜΠΟΡΟΥΝ ΝΑ ΑΛΛΑΞΟΥΝ
+      - { label: "Τίτλος Έργου", name: "title", widget: "string" }
+      - { label: "Ημερομηνία", name: "date", widget: "datetime" }
+      - { label: "Φωτογραφία Έργου", name: "image", widget: "image" }
+      - { label: "Περιγραφή", name: "body", widget: "markdown" }`
