@@ -1,0 +1,35 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Uncomment the line below if you are testing on your local computer
+  local_backend: true
+
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "content/home.json"
+        fields:
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+
+  - name: "portfolio"
+    label: "Portfolio"
+    files:
+      - label: "Projects Data"
+        name: "projects"
+        file: "content/projects.json"
+        fields:
+          - label: "Project List"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Project Image", name: "image", widget: "image" }
+              - { label: "Project Title", name: "title", widget: "string" }
+              - { label: "Project Subtitle", name: "subtitle", widget: "string" }
